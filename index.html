@@ -634,11 +634,30 @@ h1 { letter-spacing: -0.02em; }
 }
 .logo svg { display: block; margin-bottom: -10px; }
 .section-lead, .idea { color: #6E625D; }
-/* Knopf wie die Quest-Karte in der App */
+/* Ruhigere Abstände: eine Stufe zwischen den Themen, eine kleinere
+   zwischen Kopf und Knopf, die gehören zusammen. */
+:root {
+  --luft:      clamp(56px, 46px + 2.6vw, 80px);
+  --luft-kopf: clamp(32px, 27px + 1.4vw, 44px);
+}
+header { padding-top: clamp(36px, 26px + 2.8vw, 72px); }
+.logo { margin-bottom: 22px; }
+h1 { margin: 0 0 10px; }
+.tagline { margin-bottom: 12px; }
+.section-title { margin-bottom: 8px; }
+.section-lead { margin-bottom: 22px; }
+.section-title + .founders, .section-title + .slider { margin-top: 20px; }
+.stack { padding-bottom: calc(32px + env(safe-area-inset-bottom, 0px)); }
+.fuss {
+  margin: var(--luft) 0 0; padding-top: 24px; border-top: 1px solid var(--line);
+  justify-content: flex-start; gap: 8px 20px;
+}
+
+/* Knopf wie die Quest-Karte in der App, so breit wie die Textspalte */
 .cta { text-align: left; }
 .bigbtn.qk {
-  display: flex; align-items: center; width: 100%; max-width: 560px;
-  min-height: 116px; padding: 22px 120px 22px 24px; margin: 0 auto;
+  display: flex; align-items: center; width: 100%; max-width: none;
+  min-height: 116px; padding: 22px 120px 22px 24px; margin: 0;
   border-radius: 20px; background: #F4402C; color: #241410;
   box-shadow: 0 6px 0 #C42E19; overflow: hidden; position: relative;
 }
@@ -652,7 +671,7 @@ h1 { letter-spacing: -0.02em; }
 .kk { position: absolute; right: 24px; top: 16px; width: 82px; height: auto; }
 .kk-augen { transform-box: fill-box; transform-origin: center; transition: transform .08s; }
 .kk.zu .kk-augen { transform: scaleY(.08); }
-.webLink { margin-top: 22px; }
+.webLink { margin: 16px 0 0; }
 </style>
 <script>
 /* Die Katze im Knopf blinzelt ab und zu. */
@@ -705,90 +724,6 @@ document.addEventListener('DOMContentLoaded', function () {
     <div class="slider-dots" id="sliderDots" aria-hidden="true"></div>
   </section>
 
-  <!-- ANLEITUNG -->
-  <section class="card guide">
-    <p class="guide-intro" data-t="guideIntro"></p>
-
-    <div class="guide-steps">
-    <div class="step">
-      <div class="step-no">1</div>
-      <div class="step-text" data-t="step1"></div>
-      <div class="shot">
-        <svg class="ui" viewBox="0 0 320 88" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <rect x="0" y="0" width="320" height="88" fill="#F2F2F5"/>
-          <rect x="16" y="11" width="288" height="30" rx="10" fill="#E4E4E9"/>
-          <text x="160" y="31" font-size="13" text-anchor="middle" fill="#6E6E76"
-                font-family="-apple-system, Helvetica, Arial, sans-serif">sidequester.ch/game</text>
-          <g stroke="#A0A0A8" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M48 58 l-8 8 8 8"/>
-            <path d="M100 58 l8 8 -8 8"/>
-            <rect x="216" y="58" width="16" height="16" rx="3"/>
-            <rect x="260" y="58" width="15" height="15" rx="3"/>
-            <rect x="264" y="62" width="15" height="15" rx="3" fill="#F2F2F5"/>
-          </g>
-          <g stroke="#007aff" stroke-width="2.1" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M153 64 v8 a2 2 0 0 0 2 2 h10 a2 2 0 0 0 2 -2 v-8"/>
-            <path d="M160 70 v-13"/>
-            <path d="M155.5 61 l4.5 -4.5 4.5 4.5"/>
-          </g>
-        </svg>
-        <svg class="mark" viewBox="0 0 320 88" preserveAspectRatio="none" aria-hidden="true">
-          <circle cx="160" cy="66" r="17" fill="none" stroke="#E5325C" stroke-width="2.4"/>
-        </svg>
-      </div>
-    </div>
-
-    <div class="step">
-      <div class="step-no">2</div>
-      <div class="step-text" data-t="step2"></div>
-      <div class="shot">
-        <svg class="ui" viewBox="0 0 320 118" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <rect x="0" y="0" width="320" height="118" fill="#F2F2F5"/>
-          <g font-family="-apple-system, Helvetica, Arial, sans-serif" font-size="13" fill="#1C1C22">
-            <text x="20" y="27">Kopieren</text>
-            <g stroke="#A0A0A8" stroke-width="1.7" fill="none">
-              <rect x="284" y="14" width="12" height="13" rx="2"/>
-              <rect x="280" y="18" width="12" height="13" rx="2" fill="#F2F2F5"/>
-            </g>
-            <line x1="16" y1="40" x2="304" y2="40" stroke="#DEDEE3"/>
-            <text x="20" y="68">Zum Home-Bildschirm</text>
-            <g stroke="#1C1C22" stroke-width="1.7" fill="none">
-              <rect x="280" y="53" width="20" height="20" rx="4"/>
-              <path d="M290 58 v10 M285 63 h10"/>
-            </g>
-            <line x1="16" y1="88" x2="304" y2="88" stroke="#DEDEE3"/>
-            <text x="20" y="110">Markierung</text>
-            <path d="M282 98 h14 v16 l-7 -5 -7 5 z" stroke="#A0A0A8" stroke-width="1.7" fill="none"/>
-          </g>
-        </svg>
-        <svg class="mark" viewBox="0 0 320 118" preserveAspectRatio="none" aria-hidden="true">
-          <rect x="10" y="49" width="300" height="32" rx="9" fill="none" stroke="#E5325C" stroke-width="2.4"/>
-        </svg>
-      </div>
-    </div>
-
-    <div class="step">
-      <div class="step-no">3</div>
-      <div class="step-text" data-t="step3"></div>
-      <div class="shot">
-        <svg class="ui" viewBox="0 0 320 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <rect x="0" y="0" width="320" height="100" fill="#F2F2F5"/>
-          <g font-family="-apple-system, Helvetica, Arial, sans-serif">
-            <text x="20" y="29" font-size="13" fill="#8A8A93">Abbrechen</text>
-            <text x="272" y="29" font-size="13" text-anchor="middle" font-weight="bold" fill="#007aff">Hinzufügen</text>
-            <line x1="16" y1="48" x2="304" y2="48" stroke="#DEDEE3"/>
-            <rect x="20" y="58" width="34" height="34" rx="9" fill="#16162B"/>
-            <text x="37" y="81" font-size="16" text-anchor="middle" font-weight="bold" fill="#fff">S</text>
-            <text x="66" y="80" font-size="14" fill="#1C1C22">Sidequester</text>
-          </g>
-        </svg>
-        <svg class="mark" viewBox="0 0 320 100" preserveAspectRatio="none" aria-hidden="true">
-          <rect x="228" y="12" width="88" height="33" rx="16" fill="none" stroke="#E5325C" stroke-width="2.4"/>
-        </svg>
-      </div>
-    </div>
-    </div>
-  </section>
 
   <footer class="fuss">
     <a href="/impressum.html">Impressum</a>
