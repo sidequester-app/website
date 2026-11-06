@@ -9,7 +9,7 @@
 <meta property="og:description" content="Tracke deine Sidequests, mach bei denen von anderen mit und sammel XP. Sidequester ist in der Testphase.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://sidequester.ch">
-<meta name="theme-color" content="#F4F4F6">
+<meta name="theme-color" content="#FFFCF7">
 
 <script>
 /* ================================================================
@@ -31,7 +31,7 @@ const CONFIG = {
      "Oder im Browser öffnen". Solange sie leer ist, bleibt alles
      wie bisher: der Knopf führt in die Webversion.
      ------------------------------------------------------------- */
-  appStoreUrl: "",                                  // z. B. https://apps.apple.com/ch/app/sidequester/id123456789
+  appStoreUrl: "https://apps.apple.com/ch/app/sidequester-real-life-quests/id6826339243",                                  // z. B. https://apps.apple.com/ch/app/sidequester/id123456789
 
   /* ---- DIE ZWEI ------------------------------------------------
      FOTOS EINFACH REINLEGEN — hier muss nichts eingetragen werden.
@@ -124,26 +124,29 @@ const CONFIG = {
 /* ==================== ENDE — ab hier Code ==================== */
 </script>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #F4F4F6;
+  --bg: #FFFCF7;
   --card: #FFFFFF;
-  --ink: #16162B;
-  --muted: #6E6E78;
-  --line: #ECECEF;
+  --ink: #241410;
+  --muted: #6E625D;
+  --line: #E9E5E0;
 
-  --coral-1: #FF7A45;
-  --coral-2: #F4436C;
-  --coral: #E5325C;
-  --coral-bg: #FFEFF1;
+  --coral-1: #F4402C;
+  --coral-2: #F4402C;
+  --coral: #D63220;
+  --coral-bg: #FEE9E3;
 
-  --violet: #6C5CE7;
-  --violet-bg: #EFEDFF;
-  --mint: #00A98F;
+  --violet: #241410;
+  --violet-bg: #F4F0EB;
+  --mint: #8ADCE4;
 
   --r-card: 24px;
   --r-img: 18px;
-  --shadow: 0 1px 2px rgba(20,20,43,.04), 0 10px 26px rgba(20,20,43,.05);
+  --shadow: 0 0 0 1px #E9E5E0;
 
   /* ---------- Masse, die mit dem Bildschirm mitwachsen ----------
      Alle Werte interpolieren linear zwischen 375px (iPhone) und
@@ -176,7 +179,7 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--ink);
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui, sans-serif;
+  font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   font-size: var(--fs-body);
   /* kurze Zeilen brauchen weniger Zeilenabstand als lange */
   line-height: 1.5;
@@ -224,8 +227,8 @@ p { text-wrap: pretty; }
   white-space: nowrap;
 }
 .pill-violet { background: var(--violet-bg); color: var(--violet); }
-.pill-mint   { background: var(--mint); color: #fff; }
-.pill-grey   { background: #E7E7EC; color: #5F5F6A; }
+.pill-mint   { background: var(--mint); color: #241410; }
+.pill-grey   { background: #F4F0EB; color: #6E625D; }
 
 /* Abschnitt: fette Überschrift, darunter ein normaler Satz */
 .section-title {
@@ -239,7 +242,7 @@ p { text-wrap: pretty; }
 .section-lead {
   font-size: var(--fs-lead);
   font-weight: 400;
-  color: #4E4E5A;
+  color: #6E625D;
   letter-spacing: -0.005em;
   line-height: 1.5;
   max-width: 44ch;
@@ -269,7 +272,7 @@ h1 {
 }
 
 .idea {
-  color: #43434F;
+  color: #6E625D;
   font-size: var(--fs-lead);
   line-height: 1.55;
   letter-spacing: -0.005em;
@@ -305,7 +308,7 @@ h1 {
 .slider-dots i {
   width: 6px; height: 6px;
   border-radius: 50%;
-  background: #D2D2DA;
+  background: #E9E5E0;
   transition: background .25s ease-out, transform .25s ease-out;
 }
 .slider-dots i.on { background: var(--coral); transform: scale(1.25); }
@@ -332,7 +335,7 @@ h1 {
   line-height: 1.2;
   margin: 0 0 7px;
 }
-.quest p { color: #4E4E58; font-size: 16px; line-height: 1.5; margin-bottom: 14px; }
+.quest p { color: #6E625D; font-size: 16px; line-height: 1.5; margin-bottom: 14px; }
 
 /* wer die Quest erstellt hat — das Handle zeigt, dass sie echt ist */
 .quest .von {
@@ -349,7 +352,7 @@ h1 {
   font-style: normal; font-weight: 700; font-size: 11px;
   display: grid; place-items: center;
 }
-.quest .von b { color: #3A3A46; font-weight: 600; }
+.quest .von b { color: #241410; font-weight: 600; }
 
 /* ---------- Wer sind wir ----------
    Alle Porträts liegen im Format 3:4 vor (siehe fotos-optimieren.command).
@@ -436,7 +439,7 @@ h1 {
   position: absolute; inset: 0;
   display: flex; align-items: center; justify-content: center;
   text-align: center; padding: 10px;
-  font-size: 13px; line-height: 1.3; color: #A8A8B0;
+  font-size: 13px; line-height: 1.3; color: #857A75;
 }
 /* Foto mit mehreren Bildern: antippbar */
 .founders .multi .pic { cursor: pointer; -webkit-tap-highlight-color: transparent; }
@@ -517,13 +520,13 @@ h1 {
   position: relative;
   overflow: hidden;
   text-decoration: none;
-  color: #fff;
-  background: linear-gradient(100deg, var(--coral-1), var(--coral-2));
+  color: #241410;
+  background: var(--coral-1);
   max-width: 100%;
   border-radius: 28px;
   padding: 15px 28px 17px;
   letter-spacing: -0.015em;
-  box-shadow: 0 6px 18px rgba(229,50,92,.26);
+  box-shadow: none;
   /* Startzustand fürs Reinziehen */
   opacity: 0;
   transform: translateY(14px) scale(.94);
@@ -535,7 +538,7 @@ h1 {
 .bigbtn.in { opacity: 1; transform: translateY(0) scale(1); }
 .bigbtn:active {
   transform: scale(.97);
-  box-shadow: 0 3px 10px rgba(229,50,92,.22);
+  box-shadow: none;
   transition: transform .1s ease-out, box-shadow .1s ease-out;
 }
 
@@ -591,8 +594,8 @@ h1 {
 .step-no {
   width: 28px; height: 28px;
   border-radius: 50%;
-  background: linear-gradient(140deg, var(--coral-1), var(--coral-2));
-  color: #fff;
+  background: var(--coral-1);
+  color: #241410;
   font-size: 14px; font-weight: 700;
   display: flex; align-items: center; justify-content: center;
 }
@@ -605,7 +608,7 @@ h1 {
   margin-top: 12px;
   border-radius: 14px;
   overflow: hidden;
-  background: #F2F2F5;
+  background: #F4F0EB;
 }
 .shot svg.ui { display: block; width: 100%; height: auto; }
 .shot .mark { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
@@ -615,6 +618,27 @@ h1 {
   * { transition: none !important; animation: none !important; }
   .bigbtn { opacity: 1; transform: none; }
 }
+
+/* ---------- Neues Erscheinungsbild (web-home/neues-design.py) ---------- */
+h1, .section-title, .quest h3 {
+  font-family: "Archivo Black", "Arial Black", sans-serif;
+  font-weight: 400;
+}
+h1 { letter-spacing: -0.02em; }
+.section-title { letter-spacing: -0.01em; }
+.card { box-shadow: none; border: 1px solid var(--line); }
+.logo {
+  display: flex; align-items: flex-end; justify-content: center;
+  width: 56px; height: 56px; margin-bottom: 16px;
+  border-radius: 16px; background: #F4402C; overflow: hidden;
+}
+.logo svg { display: block; margin-bottom: -10px; }
+.section-lead, .idea { color: #6E625D; }
+/* Knopf: flach und ruhig – kein Lichtreflex, kein Schatten */
+.bigbtn { border-radius: 999px; padding: 16px 30px 17px; }
+.bigbtn::after { display: none; }
+.bigbtn .b2 { opacity: .72; }
+.bigbtn:hover { background: #E0381F; }
 </style>
 </head>
 <body>
@@ -622,6 +646,7 @@ h1 {
 <div class="wrap stack">
 
   <header>
+    <span class="logo" aria-hidden="true"><svg viewBox="0 0 453.6 729.3" width="34" height="55"><path d="M420.2,478.5c.8-4.9.3-6.7,1.6-10.2,2.2-6.2,1.1-13.1,1.6-19.4s.5-5.5-.2-8.7c-2.4-9.8,6.7-24.7,6.5-24.7l3.6-.5,2.1-2.2c1-1.1,5,3,10.8,3.4,5,5.1,7.4,12,7.4,19.4,0,15.3-2.9,29.6-6.2,44.3l-1.4,12.7c-.4,4-1.3,6.5-2,10.5l-1.8,9.8-4,8.4-5.1,12.8-3.5,9c-1.8,4.6-2.6,8.2-5.4,12l-3.2,5.8-4.8,9.6-5.8,12.4-11.4,22.4-8.8,16.1-7.9,14.9-10.7,16.5-17.2,23.7-19.7,30.3c-2.7,4.1-4.5,7.4-9.2,10l-8.9,4.9c-6.1,3.4-14,2.3-20.9,2.1l-17.4-.4-10.1,2.1-27.9,2.4-9.6,1.1-9.1-.6c-3.2-.2-6.5,1-10,.8l-16.3-1.2c-.4,0-1.8-.8-2.2-.9s-1.8,1.4-2.3,1.4l-12.1-.7-6-.5-8.2-.8-7.7-.7c-3.8.5-8,.1-12.4.2h-9.2c0,0-14.1-1.7-14.1-1.7l-25.3-3.8-8.6-1.8-10.5-2.1-15.7-3-6.4-1.6c-3.5-.9-5.9-3.3-6-7.1l-.5-17.3-.3-64.7.9-57,4.6-50.1c.5-.6,1.9-1.9,1.7-2.5l-1-2.4c2.9-26.1,7.6-51.4,13.5-77.1l2.5-8.3,4.7-13.6,3.2-9.9,4.7-21.5c1.2-5.4,4-10.5,2.7-16.5s-3.1-2.6-5.4-3l-8.6-1.5-1-2.1c-.6-1.3-.7,1.6-2,1.1l-16.1-7.1-10.1-6.2c-5.5-3.4-9.7-9-14.2-13.8s-3.7-5.6-5.2-8.8l-6.8-14.2c-4.7-9.7-8.6-20-9.6-30.8l-1.8-10.1-2.8-22.5-.7-9.2-.8-16.8-.2-10.8.9-45.3.8-13.4.6-9.5c1.2-18.5,2.9-36.8,11.8-53.4l6.2-13.8,9-22.9,9.2-23.7,4.4-9.6c2.8-6.1,5.6-13.5,13-15.9s7.8,3.6,9.8,6.5c3.5,5.1,3.7,11.4,5.1,17.1l3.5,13.6c1.6,6.3,4.1,12.9,6.8,18.8l7.8,17.4,4.9,11.9,9.3,18.5,26.1,3.5c8.6,1.2,16.6.8,25.2,1.3l11,.6c1.4,0,4.2,1,5.4,1.5,1-.2,3.1-.4,4.6-.3l26.5,1.5,13,.4h16.2c0,0,18.6,2.4,18.6,2.4l15.8,1.4c6.8.6,21.4-2.8,27.3-7s4.9-8.2,7.2-11.7l6.4-9.7,9.5-14.5,10-18.1,6.3-10.3c.2-.3,1.5-1.4,1.6-1.1l.6,2.2c.5.4,1,.9.4.3l2.1-1.4-1.4-3.5c-.4-1,1.3-3.6,1.9-4.6l4.7-7.3,4-6.9,6.9-11.4c2.3-3.7,6.7-9.5,11.6-9.7s11,5.6,12.7,10.5c2.9,8.2,5.3,15.5,6.7,23.8l3.2,18.7c.5,2.7.6,4.9-.4,7.3,2.3,2.5,5.1,7.2,3.6,10.7,1.5,2.1,2.7,4.9,3.2,8.1l4.6,20.7c6.8,10.5,6,21.8,6.2,33.6l.4,32-.3,17.8-1.2,31.7-.6,14.6-1,12-3.7,24.7-2.5,16.5-4.3,24.8c-1.5,8.4-6.9,16.2-11.6,23.2s-12.7,16.4-22.1,20.7-2.6,1.2-2.6,1.9v3.1s-8.2,2.7-8.2,2.7c-6.6,2.2-13,5.5-20,5.1l-15.4-.7,1.3,10.4,4,16.2,3,15.1,2,10.9,1.2,9.8.8,8.3,3.3,19.7-.2,9.6c0,2.7.4,4,1.3,6.5,1.4,4.1.8,9,.9,13.5l.3,12.1.6,6.8.3,10.2-.3,29.7-3.4,90.2c-.2,5.9,1.1,11.3,5.9,13.6,5,2.3,10.2,2.2,14.4-2.2l10.3-10.8c2.1-2.2,5.3-3.7,6.9-7s3.9-3.1,5.4-4.5c5.3-5,8.3-12.1,11.7-18.4l5.7-10.4,3.5-9.4,9-24.8,3.1-9,2.3-8.2c1-3.7,2.3-6.9,4.2-9.9l1.1-5.1,5.7-25.9,1.9-7.7,2.5-15.4Z" fill="#241410"/><path d="M131.1,276.7l6.1-2.4c16-6.4,31.7-25,34.7-41.8,3.2-17.9-.2-34.5-11.1-48.9-3.1-4.1-5.9-8-10.1-11l-5.8-4.1c-7.6-5.3-15.3-8.6-24.4-9.4l-10.7-1c-8.6-.8-22.8,2.9-31.2,7.2s-12.8,8.4-18.2,14-7.5,9.1-10.5,16.7c-4.4,11.2-6.3,22.2-3.7,34.3,2.4,11.3,7.9,23,16.7,31l5.4,4.9,6.9,5.6c6.8,1,8.1,5.1,18.3,7.2,12.8,2.6,25.1,2.7,37.7-2.3Z" fill="#FFFCF7"/><path d="M361.1,248.8l2.9-7.8c2.8-7.5,2.8-14.7,2.3-22.6s-.3-6.6-1.4-9.9l-3.8-11.6c-2.9-5.7-5.9-11.8-10.7-16.1l-12.1-10.9c-2.5-2.3-4.9-3.9-8.3-5l-7.6-2.3c-30.4-9.4-60,4.7-74.6,32.4s-6.6,21-6,31.8c.9,14.3,5.2,25.2,14.4,36.2s13.4,13.4,23.5,17.6,21.2,6.1,32,4.4,26-7.8,35.8-17.3,10.6-11,13.5-18.9Z" fill="#FFFCF7"/><g transform="translate(-10 12)"><path d="M82,225.7c-2.4-4.4-2.1-10.1-2.2-14.8-.1-8.2,6.6-12.7,7.3-10.4s-.4-1.4-.7-2.5c10.6-8.6,28.3-2.3,34.5,10.1,3.6,7.2,3.8,15.7-1.4,21.4-5.3,5.9-12.4,8.1-19.6,7.6s-14.1-4.2-17.9-11.4Z" fill="#241410"/><path d="M320.7,230.8c-6.4,13.9-23.4,13-29.7,7.7-4.8-4.1-9.5-8.7-11.1-14.8-2.8-10.3,4.1-22.5,14.7-23.6l10.4-1.1c3.9-.4,8.7,1.9,11.9,4.8,7.6,6.8,8,17.9,3.8,27.1Z" fill="#241410"/></g></svg></span>
     <span class="pill pill-grey" data-t="badge"></span>
     <h1 data-t="title"></h1>
     <p class="tagline" data-t="tagline"></p>
