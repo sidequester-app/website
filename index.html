@@ -125,9 +125,10 @@ const CONFIG = {
 /* ==================== ENDE — ab hier Code ==================== */
 </script>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<!-- Schriften selbst gehostet (OFL-1.1), damit keine IP-Adresse an Google geht. -->
+<link rel="preload" href="/fonts/plus-jakarta-sans-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/archivo-black-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/fonts/schriften.css">
 <style>
 :root {
   --bg: #FFFCF7;
