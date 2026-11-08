@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="robots" content="noindex" />
+    <meta name="referrer" content="no-referrer" />
+    <title>Sidequester</title>
+    <meta name="theme-color" content="#FFFCF7" />
+    <style>
+      html, body { height: 100%; margin: 0; background: #FFFCF7;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+        color: #6E625D; display: grid; place-items: center; text-align: center; }
+      main { padding: 24px; max-width: 340px; }
+      img { width: 64px; height: 64px; border-radius: 16px; }
+      h1 { font-family: "Arial Black", "Helvetica Neue", Helvetica, sans-serif; font-weight: 900;
+        color: #241410; font-size: 22px; margin: 16px 0 8px; }
+      p { font-size: 15px; line-height: 22px; margin: 0; }
+      a { color: #C42E19; font-weight: 700; }
+    </style>
+    <!--
+      Mail-Links von Supabase (Passwort vergessen, Registrieren, …) laufen
+      über diese Seite. So steht in der Mail nur sidequester.ch – Spamfilter
+      werten fremde Domains in Passwort-Mails als Phishing-Zeichen.
+
+      Der Schlüssel steht hinter dem #, geht also nie an GitHub. Die Seite
+      reicht ihn per JavaScript an Supabase weiter; Link-Scanner ohne
+      JavaScript verbrauchen ihn darum auch nicht vorzeitig.
+
+      Erzeugt aus mail-vorlagen/ (siehe EINRICHTEN.md). Nicht löschen,
+      sonst führen alle Links in verschickten Mails ins Leere.
+    -->
+    <script>
+      (function () {
+        var API = 'https://nfjnylvwsudukokfutex.supabase.co/auth/v1/verify';
+        var WEB = 'https://sidequester.ch/game';
+        var ZIELE = {
+          recovery: WEB + '/passwort-neu',
+          signup: WEB + '/',
+          email_change: WEB + '/',
+          magiclink: WEB + '/',
+          invite: WEB + '/passwort-neu'
+        };
+        var p = new URLSearchParams(location.hash.replace(/^#/, ''));
+        var t = p.get('t') || '';
+        var a = p.get('a') || '';
+        if (!/^[A-Za-z0-9_-]{10,200}$/.test(t) || !Object.prototype.hasOwnProperty.call(ZIELE, a)) {
+          window.__kaputt = true;
+          return;
+        }
+        location.replace(API + '?token=' + encodeURIComponent(t) + '&type=' + a
+          + '&redirect_to=' + encodeURIComponent(ZIELE[a]));
+      })();
+    </script>
+  </head>
+  <body>
+    <main>
+      <img src="/game/apple-touch-icon.png" alt="" />
+      <h1 id="titel">Einen Moment …</h1>
+      <p id="text">Du wirst zu Sidequester weitergeleitet.</p>
+    </main>
+    <script>
+      if (window.__kaputt) {
+        document.getElementById('titel').textContent = 'Link unvollständig';
+        document.getElementById('text').innerHTML =
+          'Dieser Link ist kaputt oder abgeschnitten. Fordere in der App einfach eine neue Mail an.'
+          + '<br><br><a href="/game/login">Zu Sidequester</a>';
+      }
+    </script>
+    <noscript><p>Bitte JavaScript einschalten, damit der Link funktioniert.</p></noscript>
+  </body>
+</html>
