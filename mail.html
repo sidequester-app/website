@@ -41,6 +41,16 @@
           magiclink: WEB + '/',
           invite: WEB + '/passwort-neu'
         };
+        // Wer sich in der iPhone-App angemeldet hat (z=app, setzt die Edge
+        // Function mail-senden), kommt nach dem Bestätigen zurück in die
+        // App – angemeldet, ohne Passwort nochmal einzutippen. Am Computer
+        // gibt es die App nicht, dort bleibt es bei der Webversion.
+        var APP = {
+          recovery: 'sidequester://passwort-neu',
+          signup: 'sidequester://',
+          email_change: 'sidequester://',
+          magiclink: 'sidequester://'
+        };
         var p = new URLSearchParams(location.hash.replace(/^#/, ''));
         var t = p.get('t') || '';
         var a = p.get('a') || '';
@@ -48,8 +58,12 @@
           window.__kaputt = true;
           return;
         }
+        var handy = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+          || (/Macintosh/.test(navigator.userAgent) && navigator.maxTouchPoints > 1);
+        var inApp = p.get('z') === 'app' && handy && Object.prototype.hasOwnProperty.call(APP, a);
+        window.__inApp = inApp;
         location.replace(API + '?token=' + encodeURIComponent(t) + '&type=' + a
-          + '&redirect_to=' + encodeURIComponent(ZIELE[a]));
+          + '&redirect_to=' + encodeURIComponent(inApp ? APP[a] : ZIELE[a]));
       })();
     </script>
   </head>
@@ -60,6 +74,15 @@
       <p id="text">Du wirst zu Sidequester weitergeleitet.</p>
     </main>
     <script>
+      // Zurück in die App: Safari fragt «In Sidequester öffnen?» und bleibt
+      // auf dieser Seite stehen. Dann wenigstens sagen, dass es geklappt hat.
+      if (window.__inApp) {
+        setTimeout(function () {
+          document.getElementById('titel').textContent = 'Bestätigt';
+          document.getElementById('text').innerHTML =
+            'Weiter geht es in der App.<br><br><a href="sidequester://">Sidequester öffnen</a>';
+        }, 2500);
+      }
       if (window.__kaputt) {
         document.getElementById('titel').textContent = 'Link unvollständig';
         document.getElementById('text').innerHTML =
