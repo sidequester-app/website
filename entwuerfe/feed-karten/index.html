@@ -338,13 +338,25 @@ h1 { font-family: var(--display); font-weight: 400; font-size: clamp(30px, 4.2vw
 .v8 .zitat { padding: 0 10px; }
 .v8 .fuss { padding: 0 10px; }
 
+/* 9 · Clean: kein Band, Luft zwischen den Gruppen, eng in den Gruppen */
+.v9 { padding: 14px 14px 2px; gap: 14px; }
+.v9 .kz .wer > b { font-size: 15px; }
+.q9 { display: flex; flex-direction: column; gap: 4px; }
+.q9 h3 { font-family: var(--display); font-weight: 400; font-size: 18px; line-height: 22px; margin: 0; }
+.q9 .xp { flex: none; margin-top: 2px; }
+.q9 .qtext { font-size: 13px; line-height: 19px; }
+.v9 .foto { border-radius: 18px; }
+.v9 .notiz { margin-top: -2px; }
+.v9 .fuss { margin-top: -6px; }
+.phone.sand .q9 { background: var(--tint); border-radius: 16px; padding: 12px 14px 13px; }
+
 </style>
 </head>
 <body>
 <main class="seite">
-  <p class="marke">Sidequester · Feed-Karte · 8 Versionen</p>
+  <p class="marke">Sidequester · Feed-Karte · 9 Versionen</p>
   <h1>Gleich viel drin, weniger voll</h1>
-  <p class="lead">Jede Version zeigt genau dasselbe wie heute: Person, Zeit, Ort, Quest mit Aufgabe, XP, Foto, Text, Herzen und Kommentare. Was sich ändert, ist die Ordnung: weniger Kästen, weniger Knöpfe im Kopf, eine klare Reihenfolge. Oben dein Beitrag, darunter einer von Joscha. Neu ist Version 8: wie 7, aber kompakt und warm statt blau.</p>
+  <p class="lead">Jede Version zeigt genau dasselbe wie heute: Person, Zeit, Ort, Quest mit Aufgabe, XP, Foto, Text, Herzen und Kommentare. Was sich ändert, ist die Ordnung: weniger Kästen, weniger Knöpfe im Kopf, eine klare Reihenfolge. Oben dein Beitrag, darunter einer von Joscha. Neu ist Version 9: clean, ohne Farbband, mit Luft zwischen Person, Quest und Foto.</p>
   <span class="tipp">Tipp: Herz antippen, „···“ öffnen, im Handy runterscrollen</span>
   <button class="reset" type="button">Zurücksetzen</button>
 
@@ -385,7 +397,8 @@ h1 { font-family: var(--display); font-weight: 400; font-size: clamp(30px, 4.2vw
           <tr><td>5 Sprechblase</td><td>Persönlich: Die Person sagt etwas, dann kommt der Beweis.</td><td>Ohne Text fällt die Blase weg, die Karte wird kürzer.</td></tr>
           <tr><td>6 Espresso-Band</td><td>Mutig. Die Quest steht dunkel oben, wie die Karten von Joscha.</td><td>Viele dunkle Bänder hintereinander können schwer wirken.</td></tr>
           <tr><td>7 Band hell</td><td>Quest als Überschrift wie in 4, im Band wie in 6, aber hell und freundlich. Farbe umschaltbar: Aqua, Gelb, Hellaqua.</td><td>Braucht viel Platz. Aqua ist sonst die XP-Farbe.</td></tr>
-          <tr><td>8 Band kompakt</td><td>Wie 7 in drei Zeilen: Person, Zeit und Ort oben, Titel mit XP, Aufgabe. Gelb, Hellgelb oder Sand.</td><td>Langer Ort wird in der ersten Zeile gekürzt.</td></tr>
+          <tr><td>8 Band kompakt</td><td>Wie 7 in drei Zeilen: Person, Zeit und Ort oben, Titel mit XP, Aufgabe. Gelb, Hellgelb oder Sand.</td><td>Langer Ort wird in der ersten Zeile gekürzt. Wirkt gedrängt.</td></tr>
+          <tr><td>9 Clean</td><td>Kein Band. Drei Gruppen mit Luft dazwischen, die Quest als Überschrift über die ganze Breite. Wahlweise mit sandfarbener Quest-Fläche.</td><td>Ohne Fläche trennt nur der Abstand die Quest vom Kopf.</td></tr>
         </tbody>
       </table></div>
     </div>
@@ -679,6 +692,14 @@ function k8(p, st) {
     ${foto(p)}<p class="zitat">„${p.notiz}“</p>${fuss(p, st)}</article>`;
 }
 
+// 9 · clean: kein Farbband. Drei klar getrennte Gruppen mit Luft
+// dazwischen (Person, Quest, Beweis), innerhalb jeder Gruppe eng.
+function k9(p, st) {
+  return `<article class="fk v9">${kopf(p, 36)}
+    <div class="q9"><h3>${p.quest}</h3><p class="qtext">${p.text}</p></div>
+    ${foto(p)}<p class="notiz">${p.notiz}</p>${fuss(p, st)}</article>`;
+}
+
 function feed(karte) {
   return (st) => `<div class="fkopf"><div class="titel">Feed</div><div class="seg"><span class="an">Freunde</span><span>Für dich</span></div></div>
     ${POSTS.map((p) => karte(p, st)).join('')}`;
@@ -705,6 +726,7 @@ const ZUSTAENDE = [
   { titel: 'Espresso-Band', text: 'Die Quest steht dunkel oben wie bei Joschas Karten. Darunter Foto, Person und Text.', render: feed(k6), extra: mehrBlatt },
   { titel: 'Band hell (neu)', text: 'Mischung aus 4 und 6: Die Quest ist die Überschrift in einem farbigen Band, die Person steht klein darin. Dein Text kommt als Zitat unter das Foto. <span class="farbwahl">Farbe: <button type="button" data-var="--band" data-band="#8ADCE4" data-xp="#FFFFFF" aria-pressed="true">Aqua</button><button type="button" data-var="--band" data-band="#FFC93C" data-xp="#8ADCE4" aria-pressed="false">Gelb</button><button type="button" data-var="--band" data-band="#E2F6F8" data-xp="#8ADCE4" aria-pressed="false">Hellaqua</button></span>', render: feed(k7), extra: mehrBlatt },
   { titel: 'Band kompakt (neu)', text: 'Wie 7, aber kleiner und warm statt blau: Person, Zeit und Ort in einer Zeile, Titel und XP nebeneinander, die Aufgabe darunter. Das Band ist etwa halb so hoch. <span class="farbwahl">Farbe: <button type="button" data-var="--band8" data-band="#FFC93C" data-xp="#8ADCE4" aria-pressed="true">Gelb</button><button type="button" data-var="--band8" data-band="#FFF4D6" data-xp="#8ADCE4" aria-pressed="false">Hellgelb</button><button type="button" data-var="--band8" data-band="#F4F0EB" data-xp="#8ADCE4" aria-pressed="false">Sand</button></span>', render: feed(k8), extra: mehrBlatt },
+  { titel: 'Clean (neu)', text: 'Ohne Farbband. Drei Gruppen mit Luft dazwischen: wer, welche Quest, der Beweis. XP steht oben beim Namen, die Quest hat als Überschrift die ganze Breite, die Aufgabe leise darunter. <span class="farbwahl">Quest-Fläche: <button type="button" data-flaeche="ohne" aria-pressed="true">Ohne</button><button type="button" data-flaeche="sand" aria-pressed="false">Sand</button></span>', render: feed(k9), extra: mehrBlatt },
 ];
 
 const AKTIONEN = {
@@ -719,6 +741,15 @@ const AKTIONEN = {
 };
 
 seiteStarten();
+
+// Version 9: Quest-Fläche ohne oder in Sand
+document.addEventListener('click', (e) => {
+  const k = e.target.closest('[data-flaeche]');
+  if (!k) return;
+  const sp = k.closest('.spalte');
+  sp.querySelector('.phone').classList.toggle('sand', k.dataset.flaeche === 'sand');
+  sp.querySelectorAll('[data-flaeche]').forEach((b) => b.setAttribute('aria-pressed', String(b === k)));
+});
 
 // Auf dem Handy gleich die neueste Version zeigen: ihr Reiter steht
 // ganz rechts und wäre sonst ausserhalb der Leiste.
