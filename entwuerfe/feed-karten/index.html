@@ -354,9 +354,9 @@ h1 { font-family: var(--display); font-weight: 400; font-size: clamp(30px, 4.2vw
 .v9 .notiz .blau { color: #2BB3C0; font-weight: 800; }
 .v9 .notiz mark { background: linear-gradient(transparent 52%, #8ADCE4 52%, #8ADCE4 92%, transparent 92%); color: var(--ink); font-weight: 800; padding: 0 2px; margin: 0 -2px; }
 .v9 .notiz.linie { border-left: 3px solid #8ADCE4; padding-left: 10px; }
-.v9.linie .akt[data-aktion="komm"] { background: #E2F6F8; color: var(--ink); border-radius: 999px; padding: 0 10px; min-height: 30px; }
-.v9.linie .akt[data-aktion="komm"] svg { color: #2BB3C0; }
-.v9.linie .fuss { gap: 14px; }
+.v9.a-linie .akt[data-aktion="komm"] { background: #E2F6F8; color: var(--ink); border-radius: 999px; padding: 0 10px; min-height: 30px; }
+.v9.a-linie .akt[data-aktion="komm"] svg { color: #2BB3C0; }
+.v9.a-linie .fuss { gap: 14px; }
 
 /* 9d–9f · weitere blaue Akzente */
 .unten9 { background: #E2F6F8; border-radius: 16px; padding: 12px 14px 0; display: flex; flex-direction: column; gap: 2px; margin-bottom: 12px; }
@@ -368,13 +368,23 @@ h1 { font-family: var(--display); font-weight: 400; font-size: clamp(30px, 4.2vw
 .zitat9 .gross { font-family: var(--display); font-size: 44px; line-height: 44px; height: 26px; color: #8ADCE4; flex: none; margin-top: -2px; }
 .zitat9 p { margin: 0; }
 
+/* 9g–9i · Linie, aber verspielt statt Dokument */
+.sockel { position: relative; padding-bottom: 6px; }
+.sockel::before { content: ''; position: absolute; left: 0; right: 0; top: 6px; bottom: 0; border-radius: 18px; background: #8ADCE4; }
+.sockel .foto { position: relative; }
+.strich9 { display: flex; flex-direction: column; gap: 8px; }
+.strich9 .dash { width: 28px; height: 4px; border-radius: 2px; background: #8ADCE4; }
+.pfad9 { position: relative; padding-left: 20px; margin-top: -14px; padding-top: 14px; }
+.pfad9::before { content: ''; position: absolute; left: 4px; top: 0; height: 22px; width: 2px; border-radius: 1px; background: #8ADCE4; }
+.pfad9::after { content: ''; position: absolute; left: 0; top: 20px; width: 10px; height: 10px; border-radius: 50%; background: #8ADCE4; }
+
 </style>
 </head>
 <body>
 <main class="seite">
-  <p class="marke">Sidequester · Feed-Karte · 9 Versionen + 6 Varianten</p>
+  <p class="marke">Sidequester · Feed-Karte · 9 Versionen + 9 Varianten</p>
   <h1>Gleich viel drin, weniger voll</h1>
-  <p class="lead">Jede Version zeigt genau dasselbe wie heute: Person, Zeit, Ort, Quest mit Aufgabe, XP, Foto, Text, Herzen und Kommentare. Was sich ändert, ist die Ordnung: weniger Kästen, weniger Knöpfe im Kopf, eine klare Reihenfolge. Oben dein Beitrag, darunter einer von Joscha. Version 9 gibt es mit sechs blauen Akzenten unter dem Foto: 9a erstes Wort, 9b Marker, 9c Linie, neu 9d Name vorne, 9e hellblaue Fläche, 9f Anführungszeichen.</p>
+  <p class="lead">Jede Version zeigt genau dasselbe wie heute: Person, Zeit, Ort, Quest mit Aufgabe, XP, Foto, Text, Herzen und Kommentare. Was sich ändert, ist die Ordnung: weniger Kästen, weniger Knöpfe im Kopf, eine klare Reihenfolge. Oben dein Beitrag, darunter einer von Joscha. Version 9 gibt es mit sechs blauen Akzenten unter dem Foto: 9a erstes Wort, 9b Marker, 9c Linie, 9d Name vorne, 9e hellblaue Fläche, 9f Anführungszeichen, und neu drei verspielte Formen der Linie: 9g Aqua-Sockel, 9h kurzer Strich, 9i Pfad.</p>
   <span class="tipp">Tipp: Herz antippen, „···“ öffnen, im Handy runterscrollen</span>
   <button class="reset" type="button">Zurücksetzen</button>
 
@@ -423,6 +433,9 @@ h1 { font-family: var(--display); font-weight: 400; font-size: clamp(30px, 4.2vw
           <tr><td>9d Name vorne</td><td>Name in Blau vor dem Text, wie bei Instagram.</td><td>Der Name steht dann zweimal, oben und unten.</td></tr>
           <tr><td>9e Hellblaue Fläche</td><td>Text und Reaktionen auf hellblauer Fläche unter dem Foto.</td><td>Am meisten Farbe, die Karte wird etwas höher.</td></tr>
           <tr><td>9f Anführungszeichen</td><td>Grosses aqua “ vor dem Text.</td><td>Bei sehr kurzem Text wirkt das Zeichen gross.</td></tr>
+          <tr><td>9g Aqua-Sockel</td><td>Foto auf aqua Sockel wie die „Quest ziehen“-Karte. Farbe direkt unter dem Bild.</td><td>Der Sockel macht die Karte 6 px höher.</td></tr>
+          <tr><td>9h Kurzer Strich</td><td>Kurzer runder aqua Strich zwischen Foto und Text.</td><td>Sehr leise.</td></tr>
+          <tr><td>9i Pfad</td><td>Feine Linie vom Foto zu einem Punkt vor dem Text.</td><td>Braucht 20 px Einzug für den Text.</td></tr>
         </tbody>
       </table></div>
     </div>
@@ -719,9 +732,9 @@ function k8(p, st) {
 // 9 · clean: kein Farbband. Drei klar getrennte Gruppen mit Luft
 // dazwischen (Person, Quest, Beweis), innerhalb jeder Gruppe eng.
 function k9(p, st, art = '') {
-  return `<article class="fk v9 ${art}">${kopf(p, 36)}
+  return `<article class="fk v9 ${art ? 'a-' + art : ''}">${kopf(p, 36)}
     <div class="q9"><h3>${p.quest}</h3><p class="qtext">${p.text}</p></div>
-    ${foto(p)}${art === 'flaeche' ? `<div class="unten9">${notiz9(p, art)}${fuss(p, st)}</div>` : notiz9(p, art) + fuss(p, st)}</article>`;
+    ${art === 'sockel' ? `<div class="sockel">${foto(p)}</div>` : foto(p)}${art === 'flaeche' ? `<div class="unten9">${notiz9(p, art)}${fuss(p, st)}</div>` : notiz9(p, art) + fuss(p, st)}</article>`;
 }
 
 // Blaue Akzente unter dem Foto (Wunsch Mael): drei Varianten von 9.
@@ -730,6 +743,8 @@ function notiz9(p, art) {
   if (art === 'wort') return `<p class="notiz"><b class="blau">${erstes}</b> ${rest.join(' ')}</p>`;
   if (art === 'marker') return `<p class="notiz"><mark>${erstes}</mark> ${rest.join(' ')}</p>`;
   if (art === 'linie') return `<p class="notiz linie">${p.notiz}</p>`;
+  if (art === 'strich') return `<div class="strich9"><span class="dash" aria-hidden="true"></span><p class="notiz">${p.notiz}</p></div>`;
+  if (art === 'pfad') return `<div class="pfad9"><p class="notiz">${p.notiz}</p></div>`;
   if (art === 'name') return `<p class="notiz"><b class="blau">${p.name}</b> ${p.notiz}</p>`;
   if (art === 'zitat') return `<div class="notiz zitat9"><span class="gross" aria-hidden="true">“</span><p>${p.notiz}</p></div>`;
   return `<p class="notiz">${p.notiz}</p>`;
@@ -765,9 +780,12 @@ const ZUSTAENDE = [
   { nr: '9a', titel: '9a Erstes Wort', text: 'Wie 9. Das erste Wort deines Textes steht in Blau, wie ein Auftakt. Sonst bleibt alles ruhig.', render: feed((p, st) => k9(p, st, 'wort')), extra: mehrBlatt },
   { nr: '9b', titel: '9b Marker', text: 'Wie 9. Das erste Wort ist mit Aqua angestrichen wie mit einem Leuchtstift. Die Schrift bleibt dunkel und gut lesbar.', render: feed((p, st) => k9(p, st, 'marker')), extra: mehrBlatt },
   { nr: '9c', titel: '9c Blaue Linie', text: 'Wie 9. Eine aqua Linie links neben deinem Text, und die Kommentare stehen in einer hellblauen Pille.', render: feed((p, st) => k9(p, st, 'linie')), extra: mehrBlatt },
-  { nr: '9d', titel: '9d Name vorne (neu)', text: 'Wie 9. Vor deinem Text steht dein Name in Blau, so wie man es von Instagram kennt. Man liest sofort, wer das sagt.', render: feed((p, st) => k9(p, st, 'name')), extra: mehrBlatt },
-  { nr: '9e', titel: '9e Hellblaue Fläche (neu)', text: 'Wie 9. Unter dem Foto liegen Text, Herzen und Kommentare auf einer hellblauen Fläche, wie der Rand eines Sofortbilds.', render: feed((p, st) => k9(p, st, 'flaeche')), extra: mehrBlatt },
-  { nr: '9f', titel: '9f Anführungszeichen (neu)', text: 'Wie 9. Ein grosses aqua Anführungszeichen vor deinem Text macht klar: Das hat die Person selbst gesagt.', render: feed((p, st) => k9(p, st, 'zitat')), extra: mehrBlatt },
+  { nr: '9d', titel: '9d Name vorne', text: 'Wie 9. Vor deinem Text steht dein Name in Blau, so wie man es von Instagram kennt. Man liest sofort, wer das sagt.', render: feed((p, st) => k9(p, st, 'name')), extra: mehrBlatt },
+  { nr: '9e', titel: '9e Hellblaue Fläche', text: 'Wie 9. Unter dem Foto liegen Text, Herzen und Kommentare auf einer hellblauen Fläche, wie der Rand eines Sofortbilds.', render: feed((p, st) => k9(p, st, 'flaeche')), extra: mehrBlatt },
+  { nr: '9f', titel: '9f Anführungszeichen', text: 'Wie 9. Ein grosses aqua Anführungszeichen vor deinem Text macht klar: Das hat die Person selbst gesagt.', render: feed((p, st) => k9(p, st, 'zitat')), extra: mehrBlatt },
+  { nr: '9g', titel: '9g Aqua-Sockel (neu)', text: 'Wie 9. Das Foto steht auf einem aqua Sockel, genau wie die rote „Quest ziehen“-Karte auf ihrem dunklen Rand. Farbe direkt unter dem Bild, verspielt statt Dokument.', render: feed((p, st) => k9(p, st, 'sockel')), extra: mehrBlatt },
+  { nr: '9h', titel: '9h Kurzer Strich (neu)', text: 'Wie 9. Statt einer langen Linie ein kurzer, runder aqua Strich zwischen Foto und Text, wie ein Akzent in einer App.', render: feed((p, st) => k9(p, st, 'strich')), extra: mehrBlatt },
+  { nr: '9i', titel: '9i Pfad (neu)', text: 'Wie 9. Eine feine aqua Linie läuft vom Foto zu einem Punkt vor deinem Text, wie ein Weg auf einer Quest-Karte.', render: feed((p, st) => k9(p, st, 'pfad')), extra: mehrBlatt },
 ];
 
 const AKTIONEN = {
