@@ -693,6 +693,15 @@ const AKTIONEN = {
 
 seiteStarten();
 
+// Auf dem Handy gleich die neueste Version zeigen: ihr Reiter steht
+// ganz rechts und wäre sonst ausserhalb der Leiste.
+(() => {
+  const reiter = document.querySelectorAll('.zustaende button');
+  reiter[reiter.length - 1].click();
+  const leiste = document.querySelector('.zustaende');
+  leiste.scrollLeft = leiste.scrollWidth;
+})();
+
 // Farbe des Bands in Version 7 umschalten (nur CI-Farben, kein Rot, kein Braun).
 const BANDFARBEN = {
   aqua: { band: '#8ADCE4', xp: '#FFFFFF' },
