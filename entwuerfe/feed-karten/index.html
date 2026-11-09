@@ -323,13 +323,28 @@ h1 { font-family: var(--display); font-weight: 400; font-size: clamp(30px, 4.2vw
 .farbwahl button { height: 30px; padding: 0 12px; border-radius: 15px; border: 1px solid var(--line); background: var(--karte); font-size: 12px; font-weight: 800; cursor: pointer; }
 .farbwahl button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
 
+/* 8 · Band kompakt: wie 7, nur kleiner und warm */
+.phone { --band8: #FFC93C; --band8Xp: #8ADCE4; }
+.v8 { padding: 6px 6px 2px; gap: 8px; }
+.band8 { background: var(--band8); border-radius: 20px; padding: 10px 14px 12px; display: flex; flex-direction: column; gap: 4px; }
+.band8 .byline { font-size: 12px; line-height: 16px; color: rgba(36,20,16,.72); min-height: 28px; }
+.band8 .byline span { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.band8 .byline .mehrk { width: 28px; height: 28px; color: var(--ink); }
+.band8 .av { box-shadow: 0 0 0 2px rgba(255,252,247,.9); }
+.titelz { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+.band8 h3 { font-family: var(--display); font-weight: 400; font-size: 17px; line-height: 21px; margin: 0; color: var(--ink); }
+.band8 .xp { background: var(--band8Xp); flex: none; margin-top: 1px; }
+.band8 .qtext { font-size: 13px; line-height: 18px; color: rgba(36,20,16,.78); }
+.v8 .zitat { padding: 0 10px; }
+.v8 .fuss { padding: 0 10px; }
+
 </style>
 </head>
 <body>
 <main class="seite">
-  <p class="marke">Sidequester · Feed-Karte · 7 Versionen</p>
+  <p class="marke">Sidequester · Feed-Karte · 8 Versionen</p>
   <h1>Gleich viel drin, weniger voll</h1>
-  <p class="lead">Jede Version zeigt genau dasselbe wie heute: Person, Zeit, Ort, Quest mit Aufgabe, XP, Foto, Text, Herzen und Kommentare. Was sich ändert, ist die Ordnung: weniger Kästen, weniger Knöpfe im Kopf, eine klare Reihenfolge. Oben dein Beitrag, darunter einer von Joscha. Neu ist Version 7, eine Mischung aus 4 und 6 mit hellem Band.</p>
+  <p class="lead">Jede Version zeigt genau dasselbe wie heute: Person, Zeit, Ort, Quest mit Aufgabe, XP, Foto, Text, Herzen und Kommentare. Was sich ändert, ist die Ordnung: weniger Kästen, weniger Knöpfe im Kopf, eine klare Reihenfolge. Oben dein Beitrag, darunter einer von Joscha. Neu ist Version 8: wie 7, aber kompakt und warm statt blau.</p>
   <span class="tipp">Tipp: Herz antippen, „···“ öffnen, im Handy runterscrollen</span>
   <button class="reset" type="button">Zurücksetzen</button>
 
@@ -369,7 +384,8 @@ h1 { font-family: var(--display); font-weight: 400; font-size: clamp(30px, 4.2vw
           <tr><td>4 Überschrift</td><td>Die Quest ist der Titel, die Person die Autorin. Liest sich wie eine kleine Geschichte.</td><td>Lange Quest-Titel brauchen zwei Zeilen.</td></tr>
           <tr><td>5 Sprechblase</td><td>Persönlich: Die Person sagt etwas, dann kommt der Beweis.</td><td>Ohne Text fällt die Blase weg, die Karte wird kürzer.</td></tr>
           <tr><td>6 Espresso-Band</td><td>Mutig. Die Quest steht dunkel oben, wie die Karten von Joscha.</td><td>Viele dunkle Bänder hintereinander können schwer wirken.</td></tr>
-          <tr><td>7 Band hell</td><td>Quest als Überschrift wie in 4, im Band wie in 6, aber hell und freundlich. Farbe umschaltbar: Aqua, Gelb, Hellaqua.</td><td>Aqua ist sonst die XP-Farbe. Auf dem Aqua-Band ist XP darum weiss.</td></tr>
+          <tr><td>7 Band hell</td><td>Quest als Überschrift wie in 4, im Band wie in 6, aber hell und freundlich. Farbe umschaltbar: Aqua, Gelb, Hellaqua.</td><td>Braucht viel Platz. Aqua ist sonst die XP-Farbe.</td></tr>
+          <tr><td>8 Band kompakt</td><td>Wie 7 in drei Zeilen: Person, Zeit und Ort oben, Titel mit XP, Aufgabe. Gelb, Hellgelb oder Sand.</td><td>Langer Ort wird in der ersten Zeile gekürzt.</td></tr>
         </tbody>
       </table></div>
     </div>
@@ -653,6 +669,16 @@ function k7(p, st) {
     ${foto(p)}<p class="zitat">„${p.notiz}“</p>${fuss(p, st)}</article>`;
 }
 
+// 8 · wie 7, aber kompakt und warm: Person, Zeit und Ort in einer Zeile,
+// Titel und XP nebeneinander, Aufgabe darunter. Drei Zeilen statt fünf.
+function k8(p, st) {
+  return `<article class="fk v8"><div class="band8">
+      <div class="byline">${avatar(p, 22)}<span><b>${p.name}</b> · ${p.zeit} · ${p.ort}</span>${mehrKnopf(p)}</div>
+      <div class="titelz"><h3>${p.quest}</h3>${xp(p)}</div>
+      <p class="qtext">${p.text}</p></div>
+    ${foto(p)}<p class="zitat">„${p.notiz}“</p>${fuss(p, st)}</article>`;
+}
+
 function feed(karte) {
   return (st) => `<div class="fkopf"><div class="titel">Feed</div><div class="seg"><span class="an">Freunde</span><span>Für dich</span></div></div>
     ${POSTS.map((p) => karte(p, st)).join('')}`;
@@ -677,7 +703,8 @@ const ZUSTAENDE = [
   { titel: 'Überschrift', text: 'Die Quest ist der Titel, die Person steht klein darüber. Der Text der Person kommt als Zitat unter das Foto.', render: feed(k4), extra: mehrBlatt },
   { titel: 'Sprechblase', text: 'Die Person sagt etwas, dann kommt der Beweis. Die Quest steht als ruhige Zeile unter dem Foto.', render: feed(k5), extra: mehrBlatt },
   { titel: 'Espresso-Band', text: 'Die Quest steht dunkel oben wie bei Joschas Karten. Darunter Foto, Person und Text.', render: feed(k6), extra: mehrBlatt },
-  { titel: 'Band hell (neu)', text: 'Mischung aus 4 und 6: Die Quest ist die Überschrift in einem farbigen Band, die Person steht klein darin. Dein Text kommt als Zitat unter das Foto. <span class="farbwahl">Farbe: <button type="button" data-farbe="aqua" aria-pressed="true">Aqua</button><button type="button" data-farbe="gelb" aria-pressed="false">Gelb</button><button type="button" data-farbe="hell" aria-pressed="false">Hellaqua</button></span>', render: feed(k7), extra: mehrBlatt },
+  { titel: 'Band hell (neu)', text: 'Mischung aus 4 und 6: Die Quest ist die Überschrift in einem farbigen Band, die Person steht klein darin. Dein Text kommt als Zitat unter das Foto. <span class="farbwahl">Farbe: <button type="button" data-var="--band" data-band="#8ADCE4" data-xp="#FFFFFF" aria-pressed="true">Aqua</button><button type="button" data-var="--band" data-band="#FFC93C" data-xp="#8ADCE4" aria-pressed="false">Gelb</button><button type="button" data-var="--band" data-band="#E2F6F8" data-xp="#8ADCE4" aria-pressed="false">Hellaqua</button></span>', render: feed(k7), extra: mehrBlatt },
+  { titel: 'Band kompakt (neu)', text: 'Wie 7, aber kleiner und warm statt blau: Person, Zeit und Ort in einer Zeile, Titel und XP nebeneinander, die Aufgabe darunter. Das Band ist etwa halb so hoch. <span class="farbwahl">Farbe: <button type="button" data-var="--band8" data-band="#FFC93C" data-xp="#8ADCE4" aria-pressed="true">Gelb</button><button type="button" data-var="--band8" data-band="#FFF4D6" data-xp="#8ADCE4" aria-pressed="false">Hellgelb</button><button type="button" data-var="--band8" data-band="#F4F0EB" data-xp="#8ADCE4" aria-pressed="false">Sand</button></span>', render: feed(k8), extra: mehrBlatt },
 ];
 
 const AKTIONEN = {
@@ -703,19 +730,14 @@ seiteStarten();
 })();
 
 // Farbe des Bands in Version 7 umschalten (nur CI-Farben, kein Rot, kein Braun).
-const BANDFARBEN = {
-  aqua: { band: '#8ADCE4', xp: '#FFFFFF' },
-  gelb: { band: '#FFC93C', xp: '#8ADCE4' },
-  hell: { band: '#E2F6F8', xp: '#8ADCE4' },
-};
 document.addEventListener('click', (e) => {
-  const k = e.target.closest('[data-farbe]');
+  const k = e.target.closest('[data-band]');
   if (!k) return;
   const sp = k.closest('.spalte');
-  const f = BANDFARBEN[k.dataset.farbe];
-  sp.querySelector('.phone').style.setProperty('--band', f.band);
-  sp.querySelector('.phone').style.setProperty('--bandXp', f.xp);
-  sp.querySelectorAll('[data-farbe]').forEach((b) => b.setAttribute('aria-pressed', String(b === k)));
+  const handy = sp.querySelector('.phone');
+  handy.style.setProperty(k.dataset.var, k.dataset.band);
+  handy.style.setProperty(k.dataset.var + 'Xp', k.dataset.xp);
+  sp.querySelectorAll('[data-band]').forEach((b) => b.setAttribute('aria-pressed', String(b === k)));
 });
 
 </script>
