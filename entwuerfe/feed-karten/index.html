@@ -350,13 +350,21 @@ h1 { font-family: var(--display); font-weight: 400; font-size: clamp(30px, 4.2vw
 .v9 .fuss { margin-top: -6px; }
 .phone.sand .q9 { background: var(--tint); border-radius: 16px; padding: 12px 14px 13px; }
 
+/* 9a–9c · blaue Akzente unter dem Foto */
+.v9 .notiz .blau { color: #2BB3C0; font-weight: 800; }
+.v9 .notiz mark { background: linear-gradient(transparent 52%, #8ADCE4 52%, #8ADCE4 92%, transparent 92%); color: var(--ink); font-weight: 800; padding: 0 2px; margin: 0 -2px; }
+.v9 .notiz.linie { border-left: 3px solid #8ADCE4; padding-left: 10px; }
+.v9.linie .akt[data-aktion="komm"] { background: #E2F6F8; color: var(--ink); border-radius: 999px; padding: 0 10px; min-height: 30px; }
+.v9.linie .akt[data-aktion="komm"] svg { color: #2BB3C0; }
+.v9.linie .fuss { gap: 14px; }
+
 </style>
 </head>
 <body>
 <main class="seite">
-  <p class="marke">Sidequester · Feed-Karte · 9 Versionen</p>
+  <p class="marke">Sidequester · Feed-Karte · 9 Versionen + 3 Varianten</p>
   <h1>Gleich viel drin, weniger voll</h1>
-  <p class="lead">Jede Version zeigt genau dasselbe wie heute: Person, Zeit, Ort, Quest mit Aufgabe, XP, Foto, Text, Herzen und Kommentare. Was sich ändert, ist die Ordnung: weniger Kästen, weniger Knöpfe im Kopf, eine klare Reihenfolge. Oben dein Beitrag, darunter einer von Joscha. Neu ist Version 9: clean, ohne Farbband, mit Luft zwischen Person, Quest und Foto.</p>
+  <p class="lead">Jede Version zeigt genau dasselbe wie heute: Person, Zeit, Ort, Quest mit Aufgabe, XP, Foto, Text, Herzen und Kommentare. Was sich ändert, ist die Ordnung: weniger Kästen, weniger Knöpfe im Kopf, eine klare Reihenfolge. Oben dein Beitrag, darunter einer von Joscha. Neu sind drei Varianten von Version 9 mit einem blauen Akzent unter dem Foto: 9a erstes Wort blau, 9b Marker, 9c blaue Linie.</p>
   <span class="tipp">Tipp: Herz antippen, „···“ öffnen, im Handy runterscrollen</span>
   <button class="reset" type="button">Zurücksetzen</button>
 
@@ -399,6 +407,9 @@ h1 { font-family: var(--display); font-weight: 400; font-size: clamp(30px, 4.2vw
           <tr><td>7 Band hell</td><td>Quest als Überschrift wie in 4, im Band wie in 6, aber hell und freundlich. Farbe umschaltbar: Aqua, Gelb, Hellaqua.</td><td>Braucht viel Platz. Aqua ist sonst die XP-Farbe.</td></tr>
           <tr><td>8 Band kompakt</td><td>Wie 7 in drei Zeilen: Person, Zeit und Ort oben, Titel mit XP, Aufgabe. Gelb, Hellgelb oder Sand.</td><td>Langer Ort wird in der ersten Zeile gekürzt. Wirkt gedrängt.</td></tr>
           <tr><td>9 Clean</td><td>Kein Band. Drei Gruppen mit Luft dazwischen, die Quest als Überschrift über die ganze Breite. Wahlweise mit sandfarbener Quest-Fläche.</td><td>Ohne Fläche trennt nur der Abstand die Quest vom Kopf.</td></tr>
+          <tr><td>9a Erstes Wort</td><td>Das erste Wort des Textes in Blau.</td><td>Blau als Schrift ist heller als Schwarz. Darum fett.</td></tr>
+          <tr><td>9b Marker</td><td>Das erste Wort aqua angestrichen, die Schrift bleibt dunkel.</td><td>Verspielter als 9a.</td></tr>
+          <tr><td>9c Blaue Linie</td><td>Aqua Linie neben dem Text, Kommentare in hellblauer Pille.</td><td>Die Pille macht Kommentieren lauter als das Herz.</td></tr>
         </tbody>
       </table></div>
     </div>
@@ -504,7 +515,7 @@ function seiteStarten() {
     sp.innerHTML = `<div class="phone-wrap"><div class="phone"><div class="insel"></div>
       <div class="statusbar"><span>9:41</span><span>●●● ▲ ▮</span></div>
       <div class="screen"></div>${nav()}<div class="toast"></div><div class="extra"></div></div></div>
-      <div class="erkl"><span class="nr">${n + 1}</span><b>${z.titel}</b><p>${z.text}</p></div>`;
+      <div class="erkl"><span class="nr">${z.nr ?? n + 1}</span><b>${z.titel}</b><p>${z.text}</p></div>`;
     buehne.appendChild(sp);
     const knopf = document.createElement('button');
     knopf.type = 'button';
@@ -694,10 +705,19 @@ function k8(p, st) {
 
 // 9 · clean: kein Farbband. Drei klar getrennte Gruppen mit Luft
 // dazwischen (Person, Quest, Beweis), innerhalb jeder Gruppe eng.
-function k9(p, st) {
-  return `<article class="fk v9">${kopf(p, 36)}
+function k9(p, st, art = '') {
+  return `<article class="fk v9 ${art}">${kopf(p, 36)}
     <div class="q9"><h3>${p.quest}</h3><p class="qtext">${p.text}</p></div>
-    ${foto(p)}<p class="notiz">${p.notiz}</p>${fuss(p, st)}</article>`;
+    ${foto(p)}${notiz9(p, art)}${fuss(p, st)}</article>`;
+}
+
+// Blaue Akzente unter dem Foto (Wunsch Mael): drei Varianten von 9.
+function notiz9(p, art) {
+  const [erstes, ...rest] = p.notiz.split(' ');
+  if (art === 'wort') return `<p class="notiz"><b class="blau">${erstes}</b> ${rest.join(' ')}</p>`;
+  if (art === 'marker') return `<p class="notiz"><mark>${erstes}</mark> ${rest.join(' ')}</p>`;
+  if (art === 'linie') return `<p class="notiz linie">${p.notiz}</p>`;
+  return `<p class="notiz">${p.notiz}</p>`;
 }
 
 function feed(karte) {
@@ -724,9 +744,12 @@ const ZUSTAENDE = [
   { titel: 'Überschrift', text: 'Die Quest ist der Titel, die Person steht klein darüber. Der Text der Person kommt als Zitat unter das Foto.', render: feed(k4), extra: mehrBlatt },
   { titel: 'Sprechblase', text: 'Die Person sagt etwas, dann kommt der Beweis. Die Quest steht als ruhige Zeile unter dem Foto.', render: feed(k5), extra: mehrBlatt },
   { titel: 'Espresso-Band', text: 'Die Quest steht dunkel oben wie bei Joschas Karten. Darunter Foto, Person und Text.', render: feed(k6), extra: mehrBlatt },
-  { titel: 'Band hell (neu)', text: 'Mischung aus 4 und 6: Die Quest ist die Überschrift in einem farbigen Band, die Person steht klein darin. Dein Text kommt als Zitat unter das Foto. <span class="farbwahl">Farbe: <button type="button" data-var="--band" data-band="#8ADCE4" data-xp="#FFFFFF" aria-pressed="true">Aqua</button><button type="button" data-var="--band" data-band="#FFC93C" data-xp="#8ADCE4" aria-pressed="false">Gelb</button><button type="button" data-var="--band" data-band="#E2F6F8" data-xp="#8ADCE4" aria-pressed="false">Hellaqua</button></span>', render: feed(k7), extra: mehrBlatt },
-  { titel: 'Band kompakt (neu)', text: 'Wie 7, aber kleiner und warm statt blau: Person, Zeit und Ort in einer Zeile, Titel und XP nebeneinander, die Aufgabe darunter. Das Band ist etwa halb so hoch. <span class="farbwahl">Farbe: <button type="button" data-var="--band8" data-band="#FFC93C" data-xp="#8ADCE4" aria-pressed="true">Gelb</button><button type="button" data-var="--band8" data-band="#FFF4D6" data-xp="#8ADCE4" aria-pressed="false">Hellgelb</button><button type="button" data-var="--band8" data-band="#F4F0EB" data-xp="#8ADCE4" aria-pressed="false">Sand</button></span>', render: feed(k8), extra: mehrBlatt },
-  { titel: 'Clean (neu)', text: 'Ohne Farbband. Drei Gruppen mit Luft dazwischen: wer, welche Quest, der Beweis. XP steht oben beim Namen, die Quest hat als Überschrift die ganze Breite, die Aufgabe leise darunter. <span class="farbwahl">Quest-Fläche: <button type="button" data-flaeche="ohne" aria-pressed="true">Ohne</button><button type="button" data-flaeche="sand" aria-pressed="false">Sand</button></span>', render: feed(k9), extra: mehrBlatt },
+  { titel: 'Band hell', text: 'Mischung aus 4 und 6: Die Quest ist die Überschrift in einem farbigen Band, die Person steht klein darin. Dein Text kommt als Zitat unter das Foto. <span class="farbwahl">Farbe: <button type="button" data-var="--band" data-band="#8ADCE4" data-xp="#FFFFFF" aria-pressed="true">Aqua</button><button type="button" data-var="--band" data-band="#FFC93C" data-xp="#8ADCE4" aria-pressed="false">Gelb</button><button type="button" data-var="--band" data-band="#E2F6F8" data-xp="#8ADCE4" aria-pressed="false">Hellaqua</button></span>', render: feed(k7), extra: mehrBlatt },
+  { titel: 'Band kompakt', text: 'Wie 7, aber kleiner und warm statt blau: Person, Zeit und Ort in einer Zeile, Titel und XP nebeneinander, die Aufgabe darunter. Das Band ist etwa halb so hoch. <span class="farbwahl">Farbe: <button type="button" data-var="--band8" data-band="#FFC93C" data-xp="#8ADCE4" aria-pressed="true">Gelb</button><button type="button" data-var="--band8" data-band="#FFF4D6" data-xp="#8ADCE4" aria-pressed="false">Hellgelb</button><button type="button" data-var="--band8" data-band="#F4F0EB" data-xp="#8ADCE4" aria-pressed="false">Sand</button></span>', render: feed(k8), extra: mehrBlatt },
+  { titel: 'Clean', text: 'Ohne Farbband. Drei Gruppen mit Luft dazwischen: wer, welche Quest, der Beweis. XP steht oben beim Namen, die Quest hat als Überschrift die ganze Breite, die Aufgabe leise darunter. <span class="farbwahl">Quest-Fläche: <button type="button" data-flaeche="ohne" aria-pressed="true">Ohne</button><button type="button" data-flaeche="sand" aria-pressed="false">Sand</button></span>', render: feed(k9), extra: mehrBlatt },
+  { nr: '9a', titel: '9a Erstes Wort (neu)', text: 'Wie 9. Das erste Wort deines Textes steht in Blau, wie ein Auftakt. Sonst bleibt alles ruhig.', render: feed((p, st) => k9(p, st, 'wort')), extra: mehrBlatt },
+  { nr: '9b', titel: '9b Marker (neu)', text: 'Wie 9. Das erste Wort ist mit Aqua angestrichen wie mit einem Leuchtstift. Die Schrift bleibt dunkel und gut lesbar.', render: feed((p, st) => k9(p, st, 'marker')), extra: mehrBlatt },
+  { nr: '9c', titel: '9c Blaue Linie (neu)', text: 'Wie 9. Eine aqua Linie links neben deinem Text, und die Kommentare stehen in einer hellblauen Pille.', render: feed((p, st) => k9(p, st, 'linie')), extra: mehrBlatt },
 ];
 
 const AKTIONEN = {
