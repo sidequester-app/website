@@ -358,13 +358,23 @@ h1 { font-family: var(--display); font-weight: 400; font-size: clamp(30px, 4.2vw
 .v9.linie .akt[data-aktion="komm"] svg { color: #2BB3C0; }
 .v9.linie .fuss { gap: 14px; }
 
+/* 9d–9f · weitere blaue Akzente */
+.unten9 { background: #E2F6F8; border-radius: 16px; padding: 12px 14px 0; display: flex; flex-direction: column; gap: 2px; margin-bottom: 12px; }
+.v9 .unten9 .notiz { margin-top: 0; }
+.v9 .unten9 .fuss { margin-top: 0; }
+.v9 .unten9 .akt svg { color: #2BB3C0; }
+.v9 .unten9 .akt.an svg { color: var(--rot); }
+.zitat9 { display: flex; gap: 8px; align-items: flex-start; }
+.zitat9 .gross { font-family: var(--display); font-size: 44px; line-height: 44px; height: 26px; color: #8ADCE4; flex: none; margin-top: -2px; }
+.zitat9 p { margin: 0; }
+
 </style>
 </head>
 <body>
 <main class="seite">
-  <p class="marke">Sidequester · Feed-Karte · 9 Versionen + 3 Varianten</p>
+  <p class="marke">Sidequester · Feed-Karte · 9 Versionen + 6 Varianten</p>
   <h1>Gleich viel drin, weniger voll</h1>
-  <p class="lead">Jede Version zeigt genau dasselbe wie heute: Person, Zeit, Ort, Quest mit Aufgabe, XP, Foto, Text, Herzen und Kommentare. Was sich ändert, ist die Ordnung: weniger Kästen, weniger Knöpfe im Kopf, eine klare Reihenfolge. Oben dein Beitrag, darunter einer von Joscha. Neu sind drei Varianten von Version 9 mit einem blauen Akzent unter dem Foto: 9a erstes Wort blau, 9b Marker, 9c blaue Linie.</p>
+  <p class="lead">Jede Version zeigt genau dasselbe wie heute: Person, Zeit, Ort, Quest mit Aufgabe, XP, Foto, Text, Herzen und Kommentare. Was sich ändert, ist die Ordnung: weniger Kästen, weniger Knöpfe im Kopf, eine klare Reihenfolge. Oben dein Beitrag, darunter einer von Joscha. Version 9 gibt es mit sechs blauen Akzenten unter dem Foto: 9a erstes Wort, 9b Marker, 9c Linie, neu 9d Name vorne, 9e hellblaue Fläche, 9f Anführungszeichen.</p>
   <span class="tipp">Tipp: Herz antippen, „···“ öffnen, im Handy runterscrollen</span>
   <button class="reset" type="button">Zurücksetzen</button>
 
@@ -410,6 +420,9 @@ h1 { font-family: var(--display); font-weight: 400; font-size: clamp(30px, 4.2vw
           <tr><td>9a Erstes Wort</td><td>Das erste Wort des Textes in Blau.</td><td>Blau als Schrift ist heller als Schwarz. Darum fett.</td></tr>
           <tr><td>9b Marker</td><td>Das erste Wort aqua angestrichen, die Schrift bleibt dunkel.</td><td>Verspielter als 9a.</td></tr>
           <tr><td>9c Blaue Linie</td><td>Aqua Linie neben dem Text, Kommentare in hellblauer Pille.</td><td>Die Pille macht Kommentieren lauter als das Herz.</td></tr>
+          <tr><td>9d Name vorne</td><td>Name in Blau vor dem Text, wie bei Instagram.</td><td>Der Name steht dann zweimal, oben und unten.</td></tr>
+          <tr><td>9e Hellblaue Fläche</td><td>Text und Reaktionen auf hellblauer Fläche unter dem Foto.</td><td>Am meisten Farbe, die Karte wird etwas höher.</td></tr>
+          <tr><td>9f Anführungszeichen</td><td>Grosses aqua “ vor dem Text.</td><td>Bei sehr kurzem Text wirkt das Zeichen gross.</td></tr>
         </tbody>
       </table></div>
     </div>
@@ -708,7 +721,7 @@ function k8(p, st) {
 function k9(p, st, art = '') {
   return `<article class="fk v9 ${art}">${kopf(p, 36)}
     <div class="q9"><h3>${p.quest}</h3><p class="qtext">${p.text}</p></div>
-    ${foto(p)}${notiz9(p, art)}${fuss(p, st)}</article>`;
+    ${foto(p)}${art === 'flaeche' ? `<div class="unten9">${notiz9(p, art)}${fuss(p, st)}</div>` : notiz9(p, art) + fuss(p, st)}</article>`;
 }
 
 // Blaue Akzente unter dem Foto (Wunsch Mael): drei Varianten von 9.
@@ -717,6 +730,8 @@ function notiz9(p, art) {
   if (art === 'wort') return `<p class="notiz"><b class="blau">${erstes}</b> ${rest.join(' ')}</p>`;
   if (art === 'marker') return `<p class="notiz"><mark>${erstes}</mark> ${rest.join(' ')}</p>`;
   if (art === 'linie') return `<p class="notiz linie">${p.notiz}</p>`;
+  if (art === 'name') return `<p class="notiz"><b class="blau">${p.name}</b> ${p.notiz}</p>`;
+  if (art === 'zitat') return `<div class="notiz zitat9"><span class="gross" aria-hidden="true">“</span><p>${p.notiz}</p></div>`;
   return `<p class="notiz">${p.notiz}</p>`;
 }
 
@@ -747,9 +762,12 @@ const ZUSTAENDE = [
   { titel: 'Band hell', text: 'Mischung aus 4 und 6: Die Quest ist die Überschrift in einem farbigen Band, die Person steht klein darin. Dein Text kommt als Zitat unter das Foto. <span class="farbwahl">Farbe: <button type="button" data-var="--band" data-band="#8ADCE4" data-xp="#FFFFFF" aria-pressed="true">Aqua</button><button type="button" data-var="--band" data-band="#FFC93C" data-xp="#8ADCE4" aria-pressed="false">Gelb</button><button type="button" data-var="--band" data-band="#E2F6F8" data-xp="#8ADCE4" aria-pressed="false">Hellaqua</button></span>', render: feed(k7), extra: mehrBlatt },
   { titel: 'Band kompakt', text: 'Wie 7, aber kleiner und warm statt blau: Person, Zeit und Ort in einer Zeile, Titel und XP nebeneinander, die Aufgabe darunter. Das Band ist etwa halb so hoch. <span class="farbwahl">Farbe: <button type="button" data-var="--band8" data-band="#FFC93C" data-xp="#8ADCE4" aria-pressed="true">Gelb</button><button type="button" data-var="--band8" data-band="#FFF4D6" data-xp="#8ADCE4" aria-pressed="false">Hellgelb</button><button type="button" data-var="--band8" data-band="#F4F0EB" data-xp="#8ADCE4" aria-pressed="false">Sand</button></span>', render: feed(k8), extra: mehrBlatt },
   { titel: 'Clean', text: 'Ohne Farbband. Drei Gruppen mit Luft dazwischen: wer, welche Quest, der Beweis. XP steht oben beim Namen, die Quest hat als Überschrift die ganze Breite, die Aufgabe leise darunter. <span class="farbwahl">Quest-Fläche: <button type="button" data-flaeche="ohne" aria-pressed="true">Ohne</button><button type="button" data-flaeche="sand" aria-pressed="false">Sand</button></span>', render: feed(k9), extra: mehrBlatt },
-  { nr: '9a', titel: '9a Erstes Wort (neu)', text: 'Wie 9. Das erste Wort deines Textes steht in Blau, wie ein Auftakt. Sonst bleibt alles ruhig.', render: feed((p, st) => k9(p, st, 'wort')), extra: mehrBlatt },
-  { nr: '9b', titel: '9b Marker (neu)', text: 'Wie 9. Das erste Wort ist mit Aqua angestrichen wie mit einem Leuchtstift. Die Schrift bleibt dunkel und gut lesbar.', render: feed((p, st) => k9(p, st, 'marker')), extra: mehrBlatt },
-  { nr: '9c', titel: '9c Blaue Linie (neu)', text: 'Wie 9. Eine aqua Linie links neben deinem Text, und die Kommentare stehen in einer hellblauen Pille.', render: feed((p, st) => k9(p, st, 'linie')), extra: mehrBlatt },
+  { nr: '9a', titel: '9a Erstes Wort', text: 'Wie 9. Das erste Wort deines Textes steht in Blau, wie ein Auftakt. Sonst bleibt alles ruhig.', render: feed((p, st) => k9(p, st, 'wort')), extra: mehrBlatt },
+  { nr: '9b', titel: '9b Marker', text: 'Wie 9. Das erste Wort ist mit Aqua angestrichen wie mit einem Leuchtstift. Die Schrift bleibt dunkel und gut lesbar.', render: feed((p, st) => k9(p, st, 'marker')), extra: mehrBlatt },
+  { nr: '9c', titel: '9c Blaue Linie', text: 'Wie 9. Eine aqua Linie links neben deinem Text, und die Kommentare stehen in einer hellblauen Pille.', render: feed((p, st) => k9(p, st, 'linie')), extra: mehrBlatt },
+  { nr: '9d', titel: '9d Name vorne (neu)', text: 'Wie 9. Vor deinem Text steht dein Name in Blau, so wie man es von Instagram kennt. Man liest sofort, wer das sagt.', render: feed((p, st) => k9(p, st, 'name')), extra: mehrBlatt },
+  { nr: '9e', titel: '9e Hellblaue Fläche (neu)', text: 'Wie 9. Unter dem Foto liegen Text, Herzen und Kommentare auf einer hellblauen Fläche, wie der Rand eines Sofortbilds.', render: feed((p, st) => k9(p, st, 'flaeche')), extra: mehrBlatt },
+  { nr: '9f', titel: '9f Anführungszeichen (neu)', text: 'Wie 9. Ein grosses aqua Anführungszeichen vor deinem Text macht klar: Das hat die Person selbst gesagt.', render: feed((p, st) => k9(p, st, 'zitat')), extra: mehrBlatt },
 ];
 
 const AKTIONEN = {
