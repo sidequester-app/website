@@ -89,17 +89,9 @@
       }
       img { -webkit-user-drag: none; user-drag: none; }
 
-      /* Am Computer: die App als Handy-Spalte in der Mitte statt über die
-         ganze Breite gezogen. Auf dem Handy ändert sich nichts. */
-      @media (min-width: 600px) {
-        body { background-color: #EFECE8; }
-        #root {
-          max-width: 460px;
-          margin: 0 auto;
-          background-color: #FDFCFB;
-          box-shadow: 0 0 0 1px rgba(22,20,46,.05), 0 24px 60px rgba(22,20,46,.10);
-        }
-      }
+      /* Am Computer und auf dem iPad setzt die App selbst eine Spalte in
+         die Mitte (src/ui/spalte.js, 12.11.2026). Vorher stand hier eine
+         feste Handy-Spalte von 460px. */
       /* Scrollbalken gehören zu einer Webseite, nicht zu einer App. */
       ::-webkit-scrollbar { width: 0; height: 0; }
     </style>
@@ -179,6 +171,6 @@
         });
       })();
     </script>
-  <script src="/game/entry-82cc584f17a5c9f34f594fa5c8454c53.js" defer></script>
+  <script src="/game/entry-2405550d8df1b7b2c3b12f2464471b4f.js" defer></script>
 </body>
 </html>
