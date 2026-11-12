@@ -1,0 +1,12 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["S9KZ4BTQ4W.ch.sidequest.sidequester"],
+        "components": [
+          { "/": "/game/freund/*", "comment": "QR-Code vom Quest-Pass: Profil in der App öffnen" }
+        ]
+      }
+    ]
+  }
+}
